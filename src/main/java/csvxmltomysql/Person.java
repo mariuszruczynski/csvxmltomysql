@@ -5,8 +5,16 @@ public class Person {
     private Integer id;
     private String name;
     private String surname;
-    private Integer age;
+    private String age;
     private String city;
+
+    public Person(Integer id, String name, String surname, String age, String city) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+        this.city = city;
+    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -20,7 +28,7 @@ public class Person {
         this.surname = surname;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
@@ -41,7 +49,7 @@ public class Person {
         return surname;
     }
 
-    public Integer getAge() {
+    public String getAge() {
         return age;
     }
 

@@ -8,6 +8,8 @@ public class Main {
 
 
         CsvToSql.readCsvFile(fileName);
+
+        CsvToSql.showList();
     }
 }
 
