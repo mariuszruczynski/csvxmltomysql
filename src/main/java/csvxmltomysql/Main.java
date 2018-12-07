@@ -4,11 +4,11 @@ import java.sql.SQLException;
 
 public class Main {
 
-    public static void main(String... args) throws SQLException {
+    public static void main(String... args) {
 
         String fileName = "dane-osoby.csv";
 
-        CsvToSql.readCsvFile(fileName);
+        CsvToSql.readAndSaveCsvFile(fileName);
 
     }
 }

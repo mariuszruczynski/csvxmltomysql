@@ -12,9 +12,7 @@ import java.util.List;
 
 public class CsvToSql {
 
-    public static List<Customer> customerList = new ArrayList<>();
-
-    public static void readCsvFile(String fileName) {
+    public static void readAndSaveCsvFile(String fileName) {
 
         Charset charset = Charset.forName("utf-8");
         Path path = Paths.get(fileName);
@@ -65,7 +63,7 @@ public class CsvToSql {
 
         String url = "jdbc:mysql://localhost:3306/sqldb?useSSL=false";
         String username = "root";
-        String password = "****";
+        String password = "";
         Connection conn = DriverManager.getConnection(url, username, password);
 
         String insertSQL = "INSERT INTO customers VALUES (?,?,?,?,?)";
