@@ -29,7 +29,7 @@ public class CsvToSql {
                 String name, surname, age, city;
                 Integer id;
 
-                id = (i);
+                id = (i+1);
                 if (splitLine[0] != null) {
                     name = splitLine[0];
                 } else {
@@ -59,9 +59,9 @@ public class CsvToSql {
 
     public static void saveDataToSql() throws SQLException {
 
-        String url = "jdbc:mysql://localhost:3306/sqldb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+        String url = "jdbc:mysql://localhost:3306/sqldb?useSSL=false";
         String username = "root";
-        String password = "hipcia";
+        String password = "";
         Connection conn = DriverManager.getConnection(url, username, password);
 
         String insertSQL = "INSERT INTO customers VALUES (?,?,?,?,?)";
