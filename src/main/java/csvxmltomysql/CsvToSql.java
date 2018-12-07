@@ -6,12 +6,13 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CsvToSql {
 
-    public static List<Person> personList = new ArrayList<>();
+    public static List<Customer> customerList = new ArrayList<>();
 
     public static void readCsvFile(String fileName) {
 
@@ -28,7 +29,7 @@ public class CsvToSql {
                 String name, surname, age, city;
                 Integer id;
 
-                id = (i + 1);
+                id = (i);
                 if (splitLine[0] != null) {
                     name = splitLine[0];
                 } else {
@@ -48,19 +49,35 @@ public class CsvToSql {
                 } else {
                     city = "";
                 }
-                personList.add(new Person(id, name, surname, age, city));
+                customerList.add(new Customer(id, name, surname, age, city));
                 i++;
             }
         } catch (IOException ex) {
             System.out.println("The file could not be loaded: " + fileName);
         }
-
-
     }
 
-    public static void showList() {
-        for (Person e : personList) {
-            System.out.println(e.getId() + " " + e.getName() + " " + e.getSurname() + " " + " " + e.getAge() + " " + e.getCity());
+    public static void saveDataToSql() throws SQLException {
+
+        String url = "jdbc:mysql://localhost:3306/sqldb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+        String username = "root";
+        String password = "hipcia";
+        Connection conn = DriverManager.getConnection(url, username, password);
+
+        String insertSQL = "INSERT INTO customers VALUES (?,?,?,?,?)";
+
+        for (int i = 0; i < (customerList.size()); i++) {
+            PreparedStatement pstmt = conn.prepareStatement(insertSQL);
+
+            pstmt.setInt(1, customerList.get(i).getId());
+            pstmt.setString(2, customerList.get(i).getName());
+            pstmt.setString(3, customerList.get(i).getSurname());
+            pstmt.setString(4, customerList.get(i).getAge());
+            pstmt.setString(5, customerList.get(i).getCity());
+
+            pstmt.executeUpdate();
         }
+
+        System.out.println("Successfully uploaded sql data!");
     }
 }

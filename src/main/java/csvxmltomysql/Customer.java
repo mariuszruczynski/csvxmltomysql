@@ -1,6 +1,6 @@
 package csvxmltomysql;
 
-public class Person {
+public class Customer {
 
     private Integer id;
     private String name;
@@ -8,7 +8,7 @@ public class Person {
     private String age;
     private String city;
 
-    public Person(Integer id, String name, String surname, String age, String city) {
+    public Customer(Integer id, String name, String surname, String age, String city) {
         this.id = id;
         this.name = name;
         this.surname = surname;
