@@ -9,7 +9,6 @@ public class Main {
         String fileName = "dane-osoby.csv";
 
         CsvToSql.readCsvFile(fileName);
-        CsvToSql.saveDataToSql();
 
     }
 }

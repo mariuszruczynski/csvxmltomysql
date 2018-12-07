@@ -18,18 +18,17 @@ public class CsvToSql {
 
         Charset charset = Charset.forName("utf-8");
         Path path = Paths.get(fileName);
-        String line = "";
-        String splitBy = ",";
+        String line;
         int i = 0;
 
         try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
 
             while ((line = reader.readLine()) != null) {
-                String[] splitLine = line.split(splitBy);
+                String[] splitLine = line.split(",");
                 String name, surname, age, city;
                 Integer id;
 
-                id = (i+1);
+                id = (i + 1);
                 if (splitLine[0] != null) {
                     name = splitLine[0];
                 } else {
@@ -49,35 +48,36 @@ public class CsvToSql {
                 } else {
                     city = "";
                 }
-                customerList.add(new Customer(id, name, surname, age, city));
+                Customer customer = new Customer(id, name, surname, age, city);
+                saveDataToSql(customer);
                 i++;
             }
         } catch (IOException ex) {
             System.out.println("The file could not be loaded: " + fileName);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        System.out.println("Successfully uploaded sql data!");
+
     }
 
-    public static void saveDataToSql() throws SQLException {
+    private static void saveDataToSql(Customer customer) throws SQLException {
 
         String url = "jdbc:mysql://localhost:3306/sqldb?useSSL=false";
         String username = "root";
-        String password = "";
+        String password = "****";
         Connection conn = DriverManager.getConnection(url, username, password);
 
         String insertSQL = "INSERT INTO customers VALUES (?,?,?,?,?)";
 
-        for (int i = 0; i < (customerList.size()); i++) {
-            PreparedStatement pstmt = conn.prepareStatement(insertSQL);
+        PreparedStatement pstmt = conn.prepareStatement(insertSQL);
 
-            pstmt.setInt(1, customerList.get(i).getId());
-            pstmt.setString(2, customerList.get(i).getName());
-            pstmt.setString(3, customerList.get(i).getSurname());
-            pstmt.setString(4, customerList.get(i).getAge());
-            pstmt.setString(5, customerList.get(i).getCity());
+        pstmt.setInt(1, customer.getId());
+        pstmt.setString(2, customer.getName());
+        pstmt.setString(3, customer.getSurname());
+        pstmt.setString(4, customer.getAge());
+        pstmt.setString(5, customer.getCity());
 
-            pstmt.executeUpdate();
-        }
-
-        System.out.println("Successfully uploaded sql data!");
+        pstmt.executeUpdate();
     }
 }
