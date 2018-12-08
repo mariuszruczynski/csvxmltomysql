@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
@@ -18,25 +17,19 @@ public class XmlToSql extends DefaultHandler {
 
     private Customer customer;
     private String temp;
-    private int i =1;
-    public static ArrayList<Customer> customers = new ArrayList<Customer>();
+    private int i = 1;
+
     public static void readAndSaveXML(String fileName) {
 
         try {
 
             SAXParserFactory factory = SAXParserFactory.newInstance();
-
             SAXParser saxParser = factory.newSAXParser();
-
             File xmlFile = new File(fileName);
-
             InputStream inputStream = new FileInputStream(xmlFile);
-
             InputStreamReader inputReader = new InputStreamReader(inputStream, "UTF-8");
-
             InputSource inputSource = new InputSource(inputReader);
             inputSource.setEncoding("UTF-8");
-
             saxParser.parse(inputSource, new XmlToSql());
 
         } catch (Exception e) {
@@ -49,7 +42,7 @@ public class XmlToSql extends DefaultHandler {
     }
 
     public void startElement(String uri, String localName,
-                             String qName, Attributes attributes) throws SAXException {
+                             String qName, Attributes attributes){
         temp = "";
         if (qName.equalsIgnoreCase("person")) {
             customer = new Customer();
@@ -58,18 +51,17 @@ public class XmlToSql extends DefaultHandler {
         }
     }
 
-    public void endElement(String uri, String localName, String qName)
-            throws SAXException {
+    public void endElement(String uri, String localName, String qName) {
 
-        if (qName.equalsIgnoreCase("person")) {
-            customers.add(customer);
-        } else if (qName.equalsIgnoreCase("name")) {
+        if (qName.equalsIgnoreCase("Person")) {
+            SaveCustomerToSQL.saveCustomerToSql(customer);
+        } else if (qName.equalsIgnoreCase("Name")) {
             customer.setName(temp);
-        } else if (qName.equalsIgnoreCase("surname")) {
+        } else if (qName.equalsIgnoreCase("Surname")) {
             customer.setSurname(temp);
-        } else if (qName.equalsIgnoreCase("age")) {
+        } else if (qName.equalsIgnoreCase("Age")) {
             customer.setAge(temp);
-        } else if (qName.equalsIgnoreCase("city")) {
+        } else if (qName.equalsIgnoreCase("City")) {
             customer.setCity(temp);
         }
     }

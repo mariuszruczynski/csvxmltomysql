@@ -1,6 +1,7 @@
 package csvxmltomysql;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class Main {
 
@@ -18,6 +19,7 @@ public class Main {
         String csvFileName = "dane-osoby.csv";
         String xmlFileName = "dane-osoby.xml";
 
+        XmlToSql.readAndSaveXML(xmlFileName);
         //CsvToSql.readAndSaveCsvFile(fileName);
 
     }

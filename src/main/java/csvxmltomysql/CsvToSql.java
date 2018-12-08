@@ -51,8 +51,6 @@ public class CsvToSql {
             }
         } catch (IOException ex) {
             System.out.println("The file could not be loaded: " + fileName);
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         System.out.println("Successfully uploaded sql data!");
     }
