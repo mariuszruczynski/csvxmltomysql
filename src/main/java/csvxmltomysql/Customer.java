@@ -8,6 +8,9 @@ public class Customer {
     private String age;
     private String city;
 
+    public Customer() {
+    }
+
     public Customer(Integer id, String name, String surname, String age, String city) {
         this.id = id;
         this.name = name;
