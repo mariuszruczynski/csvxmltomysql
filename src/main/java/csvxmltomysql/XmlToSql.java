@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
@@ -18,9 +19,8 @@ public class XmlToSql extends DefaultHandler {
     private Customer customer;
     private String temp;
     private int i =1;
-
+    public static ArrayList<Customer> customers = new ArrayList<Customer>();
     public static void readAndSaveXML(String fileName) {
-
 
         try {
 
@@ -58,5 +58,19 @@ public class XmlToSql extends DefaultHandler {
         }
     }
 
+    public void endElement(String uri, String localName, String qName)
+            throws SAXException {
 
+        if (qName.equalsIgnoreCase("person")) {
+            customers.add(customer);
+        } else if (qName.equalsIgnoreCase("name")) {
+            customer.setName(temp);
+        } else if (qName.equalsIgnoreCase("surname")) {
+            customer.setSurname(temp);
+        } else if (qName.equalsIgnoreCase("age")) {
+            customer.setAge(temp);
+        } else if (qName.equalsIgnoreCase("city")) {
+            customer.setCity(temp);
+        }
+    }
 }
