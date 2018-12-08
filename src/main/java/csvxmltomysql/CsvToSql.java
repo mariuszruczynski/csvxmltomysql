@@ -7,8 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CsvToSql {
 
@@ -46,8 +44,9 @@ public class CsvToSql {
                 } else {
                     city = "";
                 }
+
                 Customer customer = new Customer(id, name, surname, age, city);
-                saveDataToSql(customer);
+                SaveCustomerToSQL.saveCustomerToSql(customer);
                 i++;
             }
         } catch (IOException ex) {
@@ -56,26 +55,5 @@ public class CsvToSql {
             e.printStackTrace();
         }
         System.out.println("Successfully uploaded sql data!");
-
-    }
-
-    private static void saveDataToSql(Customer customer) throws SQLException {
-
-        String url = "jdbc:mysql://localhost:3306/sqldb?useSSL=false";
-        String username = "root";
-        String password = "";
-        Connection conn = DriverManager.getConnection(url, username, password);
-
-        String insertSQL = "INSERT INTO customers VALUES (?,?,?,?,?)";
-
-        PreparedStatement pstmt = conn.prepareStatement(insertSQL);
-
-        pstmt.setInt(1, customer.getId());
-        pstmt.setString(2, customer.getName());
-        pstmt.setString(3, customer.getSurname());
-        pstmt.setString(4, customer.getAge());
-        pstmt.setString(5, customer.getCity());
-
-        pstmt.executeUpdate();
     }
 }
