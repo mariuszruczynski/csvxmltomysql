@@ -1,5 +1,6 @@
 package csvxmltomysql.parseformat;
 
+import csvxmltomysql.model.Contact;
 import csvxmltomysql.model.Customer;
 import csvxmltomysql.service.sqlService;
 import org.xml.sax.InputSource;
@@ -9,16 +10,26 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.Attributes;
 
+import static csvxmltomysql.service.sqlService.saveContactToSql;
+
 public class XmlToSql extends DefaultHandler {
 
     private Customer customer;
     private String temp;
-    private int i = 1;
+    private int customerId = 1;
+    private int contactId = 1;
+    private int contactType;
+    private List<String> phones = new ArrayList<>();
+    private List<String> emails = new ArrayList<>();
+    private List<String> jabbers = new ArrayList<>();
+    private List<String> icq = new ArrayList<>();
 
     public static void readAndSaveXML(String fileName) {
 
@@ -43,18 +54,42 @@ public class XmlToSql extends DefaultHandler {
     }
 
     public void startElement(String uri, String localName,
-                             String qName, Attributes attributes){
+                             String qName, Attributes attributes) {
         temp = "";
         if (qName.equalsIgnoreCase("person")) {
             customer = new Customer();
-            customer.setId(i);
-            i++;
+            customer.setId(customerId);
+            customerId++;
+            phones.clear();
+            jabbers.clear();
+            emails.clear();
+            icq.clear();
         }
     }
 
     public void endElement(String uri, String localName, String qName) {
 
         if (qName.equalsIgnoreCase("Person")) {
+            for (String p : phones) {
+                contactType = 2;
+                saveContactToSql(new Contact(contactId, customerId-1, contactType, p));
+                contactId++;
+            }
+            for (String e : emails) {
+                contactType = 1;
+                saveContactToSql(new Contact(contactId, customerId-1, contactType, e));
+                contactId++;
+            }
+            for (String j : jabbers) {
+                contactType = 3;
+                saveContactToSql(new Contact(contactId, customerId-1, contactType, j));
+                contactId++;
+            }
+            for (String ic : icq) {
+                contactType = 0;
+                saveContactToSql(new Contact(contactId, customerId-1, contactType, ic));
+                contactId++;
+            }
             sqlService.saveCustomerToSql(customer);
         } else if (qName.equalsIgnoreCase("Name")) {
             customer.setName(temp);
@@ -64,6 +99,14 @@ public class XmlToSql extends DefaultHandler {
             customer.setAge(temp);
         } else if (qName.equalsIgnoreCase("City")) {
             customer.setCity(temp);
+        } else if (qName.equalsIgnoreCase("Phone")) {
+            phones.add(temp);
+        } else if (qName.equalsIgnoreCase("Email")) {
+            emails.add(temp);
+        } else if (qName.equalsIgnoreCase("Jabber")) {
+            jabbers.add(temp);
+        } else if (qName.equalsIgnoreCase("Icq")) {
+            icq.add(temp);
         }
     }
 }

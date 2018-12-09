@@ -26,5 +26,4 @@ public class CheckContactType {
         }
         return true;
     }
-
 }

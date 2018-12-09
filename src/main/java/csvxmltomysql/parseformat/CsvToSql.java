@@ -14,6 +14,7 @@ import java.nio.file.Paths;
 
 import static csvxmltomysql.model.CheckContactType.isAlphabetic;
 import static csvxmltomysql.model.CheckContactType.isNumeric;
+import static csvxmltomysql.service.sqlService.saveCustomerToSql;
 
 public class CsvToSql {
 
@@ -67,7 +68,7 @@ public class CsvToSql {
                 }
 
                 Customer customer = new Customer(customerId, name, surname, age, city);
-                sqlService.saveCustomerToSql(customer);
+                saveCustomerToSql(customer);
                 customerId++;
             }
         } catch (IOException ex) {
