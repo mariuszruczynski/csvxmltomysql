@@ -37,7 +37,7 @@ public class sqlService {
 
         try {
             conn = DriverManager.getConnection(url, username, password);
-            String insertSQL = "INSERT INTO customers VALUES (?,?,?,?)";
+            String insertSQL = "INSERT INTO contacts VALUES (?,?,?,?)";
             PreparedStatement pstmt;
             pstmt = conn.prepareStatement(insertSQL);
             pstmt.setInt(1, contact.getId());

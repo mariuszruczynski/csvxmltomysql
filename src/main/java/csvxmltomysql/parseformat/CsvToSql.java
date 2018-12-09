@@ -1,5 +1,6 @@
 package csvxmltomysql.parseformat;
 
+import csvxmltomysql.model.Contact;
 import csvxmltomysql.model.Customer;
 import csvxmltomysql.service.sqlService;
 
@@ -17,16 +18,16 @@ public class CsvToSql {
         Charset charset = Charset.forName("utf-8");
         Path path = Paths.get(fileName);
         String line;
-        int i = 1;
+        int customerId = 1;
+        int contactId = 1;
 
         try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
 
             while ((line = reader.readLine()) != null) {
                 String[] splitLine = line.split(",");
-                String name, surname, age, city;
-                Integer id;
+                String name, surname, age, city, contact;
+                int type = 0;
 
-                id = (i);
                 if (splitLine[0] != null) {
                     name = splitLine[0];
                 } else {
@@ -46,10 +47,15 @@ public class CsvToSql {
                 } else {
                     city = "";
                 }
+                for (int i = 4; i<splitLine.length; i++){
+                    contact = splitLine[i];
+                    sqlService.saveContactToSql(new Contact(contactId, customerId, type, contact));
+                    contactId++;
+                }
 
-                Customer customer = new Customer(id, name, surname, age, city);
+                Customer customer = new Customer(customerId, name, surname, age, city);
                 sqlService.saveCustomerToSql(customer);
-                i++;
+                customerId++;
             }
         } catch (IOException ex) {
             System.out.println("The file could not be loaded: " + fileName);
