@@ -10,15 +10,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class SaveCustomerToSQLTest {
 
     private Customer customer = null;
-
+    String url = "jdbc:mysql://localhost:3306/sqldb?useSSL=false";
+    String username = "root";
+    String password = "";
+    Connection conn;
 
     private Customer findCustomerById(Integer id) {
 
 
-        String url = "jdbc:mysql://localhost:3306/sqldb?useSSL=false";
-        String username = "root";
-        String password = "";
-        Connection conn;
         try {
             conn = DriverManager.getConnection(url, username, password);
             String query = "SELECT * FROM customers WHERE id = ? ";
@@ -58,23 +57,23 @@ public class SaveCustomerToSQLTest {
     }
 
     @Test
-    void addCustomerFindByIdAndCheckIsExistInDb(){
+    void addCustomerFindByIdAndCheckIsExistInDb() {
 
         int id = 1055;
         String name = "Maria";
         String surname = "Kowalska";
         String age = "25";
         String city = "Warszawa";
-        Customer testCustomer = new Customer(id, name, surname,age,city);
+        Customer testCustomer = new Customer(id, name, surname, age, city);
 
         SaveCustomerToSQL.saveCustomerToSql(testCustomer);
 
         findCustomerById(1055);
 
-        assertEquals(customer.getName(),name);
-        assertEquals(customer.getSurname(),surname);
-        assertEquals(customer.getAge(),age);
-        assertEquals(customer.getCity(),city);
+        assertEquals(customer.getName(), name);
+        assertEquals(customer.getSurname(), surname);
+        assertEquals(customer.getAge(), age);
+        assertEquals(customer.getCity(), city);
 
         delCustomerById(id);
     }
