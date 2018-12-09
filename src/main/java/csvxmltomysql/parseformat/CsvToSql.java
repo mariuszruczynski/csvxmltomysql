@@ -1,7 +1,7 @@
 package csvxmltomysql.parseformat;
 
 import csvxmltomysql.model.Customer;
-import csvxmltomysql.service.SaveCustomerToSQL;
+import csvxmltomysql.service.sqlService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -48,7 +48,7 @@ public class CsvToSql {
                 }
 
                 Customer customer = new Customer(id, name, surname, age, city);
-                SaveCustomerToSQL.saveCustomerToSql(customer);
+                sqlService.saveCustomerToSql(customer);
                 i++;
             }
         } catch (IOException ex) {

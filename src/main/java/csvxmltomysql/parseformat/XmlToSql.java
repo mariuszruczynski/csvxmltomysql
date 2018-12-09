@@ -1,7 +1,7 @@
 package csvxmltomysql.parseformat;
 
 import csvxmltomysql.model.Customer;
-import csvxmltomysql.service.SaveCustomerToSQL;
+import csvxmltomysql.service.sqlService;
 import org.xml.sax.InputSource;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -55,7 +55,7 @@ public class XmlToSql extends DefaultHandler {
     public void endElement(String uri, String localName, String qName) {
 
         if (qName.equalsIgnoreCase("Person")) {
-            SaveCustomerToSQL.saveCustomerToSql(customer);
+            sqlService.saveCustomerToSql(customer);
         } else if (qName.equalsIgnoreCase("Name")) {
             customer.setName(temp);
         } else if (qName.equalsIgnoreCase("Surname")) {

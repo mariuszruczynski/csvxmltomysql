@@ -7,7 +7,7 @@ import java.sql.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SaveCustomerToSQLTest {
+public class sqlServiceTest {
 
     private Customer customer = null;
     private String url = "jdbc:mysql://localhost:3306/sqldb?useSSL=false";
@@ -60,7 +60,7 @@ public class SaveCustomerToSQLTest {
         String city = "Warszawa";
         Customer testCustomer = new Customer(id, name, surname, age, city);
 
-        SaveCustomerToSQL.saveCustomerToSql(testCustomer);
+        sqlService.saveCustomerToSql(testCustomer);
 
         findCustomerById(1055);
 
