@@ -10,13 +10,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class SaveCustomerToSQLTest {
 
     private Customer customer = null;
-    String url = "jdbc:mysql://localhost:3306/sqldb?useSSL=false";
-    String username = "root";
-    String password = "";
-    Connection conn;
+    private String url = "jdbc:mysql://localhost:3306/sqldb?useSSL=false";
+    private String username = "root";
+    private String password = "";
+    private Connection conn;
 
     private Customer findCustomerById(Integer id) {
-
 
         try {
             conn = DriverManager.getConnection(url, username, password);
@@ -39,11 +38,6 @@ public class SaveCustomerToSQLTest {
 
     private void delCustomerById(Integer id) {
 
-
-        String url = "jdbc:mysql://localhost:3306/sqldb?useSSL=false";
-        String username = "root";
-        String password = "";
-        Connection conn;
         try {
             conn = DriverManager.getConnection(url, username, password);
             String query = "DELETE  FROM customers WHERE id = ? ";
