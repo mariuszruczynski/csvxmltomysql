@@ -1,5 +1,7 @@
-package csvxmltomysql;
+package csvxmltomysql.parseformat;
 
+import csvxmltomysql.model.Customer;
+import csvxmltomysql.service.SaveCustomerToSQL;
 import org.xml.sax.InputSource;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -11,7 +13,6 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
 
 public class XmlToSql extends DefaultHandler {
 

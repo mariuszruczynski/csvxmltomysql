@@ -1,4 +1,4 @@
-package csvxmltomysql;
+package csvxmltomysql.model;
 
 public class Customer {
 

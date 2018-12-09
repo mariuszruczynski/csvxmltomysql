@@ -1,4 +1,6 @@
-package csvxmltomysql;
+package csvxmltomysql.service;
+
+import csvxmltomysql.model.Customer;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,25 +23,14 @@ public class SaveCustomerToSQL {
 
         String insertSQL = "INSERT INTO customers VALUES (?,?,?,?,?)";
 
-        PreparedStatement pstmt = null;
+        PreparedStatement pstmt;
         try {
             pstmt = conn.prepareStatement(insertSQL);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
-        try {
             pstmt.setInt(1, customer.getId());
             pstmt.setString(2, customer.getName());
             pstmt.setString(3, customer.getSurname());
             pstmt.setString(4, customer.getAge());
             pstmt.setString(5, customer.getCity());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        try {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -1,4 +1,7 @@
-package csvxmltomysql;
+package csvxmltomysql.parseformat;
+
+import csvxmltomysql.model.Customer;
+import csvxmltomysql.service.SaveCustomerToSQL;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,7 +9,6 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.*;
 
 public class CsvToSql {
 
@@ -15,7 +17,7 @@ public class CsvToSql {
         Charset charset = Charset.forName("utf-8");
         Path path = Paths.get(fileName);
         String line;
-        int i = 0;
+        int i = 1;
 
         try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
 
@@ -24,7 +26,7 @@ public class CsvToSql {
                 String name, surname, age, city;
                 Integer id;
 
-                id = (i + 1);
+                id = (i);
                 if (splitLine[0] != null) {
                     name = splitLine[0];
                 } else {
