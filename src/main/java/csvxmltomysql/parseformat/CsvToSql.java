@@ -1,5 +1,6 @@
 package csvxmltomysql.parseformat;
 
+import csvxmltomysql.model.CheckContactType;
 import csvxmltomysql.model.Contact;
 import csvxmltomysql.model.Customer;
 import csvxmltomysql.service.sqlService;
@@ -10,6 +11,9 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import static csvxmltomysql.model.CheckContactType.isAlphabetic;
+import static csvxmltomysql.model.CheckContactType.isNumeric;
 
 public class CsvToSql {
 
@@ -47,8 +51,17 @@ public class CsvToSql {
                 } else {
                     city = "";
                 }
-                for (int i = 4; i<splitLine.length; i++){
+                for (int i = 4; i < splitLine.length; i++) {
                     contact = splitLine[i];
+                    if (contact.contains("@")) {
+                        type = 1;
+                    } else if (isNumeric(contact)) {
+                        type = 2;
+                    } else if (isAlphabetic(contact)) {
+                        type = 3;
+                    } else {
+                        type = 0;
+                    }
                     sqlService.saveContactToSql(new Contact(contactId, customerId, type, contact));
                     contactId++;
                 }
