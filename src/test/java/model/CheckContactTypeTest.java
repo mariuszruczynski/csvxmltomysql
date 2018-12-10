@@ -50,11 +50,13 @@ public class CheckContactTypeTest {
         String testContact3 = "sometext@some.text";
         String testContact4 = "@2584552";
         String testContact5 = "some@sometext";
+        String testContact6 = "some.sometext@";
 
         assertTrue(CheckContactType.isEmail(testContact1));
         assertTrue(!CheckContactType.isEmail(testContact2));
         assertTrue(CheckContactType.isEmail(testContact3));
         assertTrue(!CheckContactType.isEmail(testContact4));
         assertTrue(CheckContactType.isEmail(testContact5));
+        assertTrue(!CheckContactType.isEmail(testContact6));
     }
 }

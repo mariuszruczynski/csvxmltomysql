@@ -34,7 +34,7 @@ public class CheckContactType {
         if (input == null) {
             return false;
         }
-        if (input.startsWith("@")) {
+        if (input.startsWith("@") || input.endsWith("@")) {
             return false;
         }
         if (input.contains("@")) {
