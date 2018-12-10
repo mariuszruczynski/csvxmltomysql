@@ -3,12 +3,12 @@ package csvxmltomysql.service;
 import csvxmltomysql.model.Contact;
 import csvxmltomysql.model.Customer;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class SqlService {
+
+    private static int maxCustomersId;
+    private static int maxContactId;
 
     private static String url = "jdbc:mysql://localhost:3306/sqldb?useSSL=false";
     private static String username = "root";
@@ -49,4 +49,38 @@ public class SqlService {
             e.printStackTrace();
         }
     }
+
+    public static int findMaxCustomersId() {
+        try {
+            conn = DriverManager.getConnection(url, username, password);
+            String query = "SELECT MAX(id) FROM customers";
+            ResultSet rs;
+            rs = conn.createStatement()
+                    .executeQuery(query);
+            rs.next();
+            maxCustomersId = rs.getInt(1);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return maxCustomersId;
+    }
+
+    public static int findMaxContactsId() {
+        try {
+            conn = DriverManager.getConnection(url, username, password);
+            String query = "SELECT MAX(id) FROM contacts";
+            ResultSet rs;
+            rs = conn.createStatement()
+                    .executeQuery(query);
+            rs.next();
+            maxContactId = rs.getInt(1);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return maxContactId;
+    }
+
+
 }

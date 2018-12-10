@@ -14,6 +14,8 @@ import java.nio.file.Paths;
 import static csvxmltomysql.model.CheckContactType.isJabber;
 import static csvxmltomysql.model.CheckContactType.insTelNumber;
 import static csvxmltomysql.model.CheckContactType.isMail;
+import static csvxmltomysql.service.SqlService.findMaxContactsId;
+import static csvxmltomysql.service.SqlService.findMaxCustomersId;
 import static csvxmltomysql.service.SqlService.saveCustomerToSql;
 
 public class CsvToSql {
@@ -23,8 +25,8 @@ public class CsvToSql {
         Charset charset = Charset.forName("utf-8");
         Path path = Paths.get(fileName);
         String line;
-        int customerId = 1;
-        int contactId = 1;
+        int customerId = findMaxCustomersId() + 1;
+        int contactId = findMaxContactsId() + 1;
 
         try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
 

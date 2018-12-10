@@ -17,14 +17,14 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.Attributes;
 
-import static csvxmltomysql.service.SqlService.saveContactToSql;
+import static csvxmltomysql.service.SqlService.*;
 
 public class XmlToSql extends DefaultHandler {
 
     private Customer customer;
     private String temp;
-    private int customerId = 1;
-    private int contactId = 1;
+    private int customerId = findMaxCustomersId() + 1;
+    private int contactId = findMaxContactsId() + 1;
     private int contactType;
     private List<String> phones = new ArrayList<>();
     private List<String> emails = new ArrayList<>();
@@ -72,22 +72,22 @@ public class XmlToSql extends DefaultHandler {
         if (qName.equalsIgnoreCase("Person")) {
             for (String p : phones) {
                 contactType = 2;
-                saveContactToSql(new Contact(contactId, customerId-1, contactType, p));
+                saveContactToSql(new Contact(contactId, customerId - 1, contactType, p));
                 contactId++;
             }
             for (String e : emails) {
                 contactType = 1;
-                saveContactToSql(new Contact(contactId, customerId-1, contactType, e));
+                saveContactToSql(new Contact(contactId, customerId - 1, contactType, e));
                 contactId++;
             }
             for (String j : jabbers) {
                 contactType = 3;
-                saveContactToSql(new Contact(contactId, customerId-1, contactType, j));
+                saveContactToSql(new Contact(contactId, customerId - 1, contactType, j));
                 contactId++;
             }
             for (String ic : icq) {
                 contactType = 0;
-                saveContactToSql(new Contact(contactId, customerId-1, contactType, ic));
+                saveContactToSql(new Contact(contactId, customerId - 1, contactType, ic));
                 contactId++;
             }
             SqlService.saveCustomerToSql(customer);

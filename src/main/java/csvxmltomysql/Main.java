@@ -1,5 +1,7 @@
 package csvxmltomysql;
 
+import csvxmltomysql.service.SqlService;
+
 import java.util.Scanner;
 
 import static csvxmltomysql.parseformat.CsvToSql.readAndSaveCsvFile;
@@ -13,6 +15,7 @@ public class Main {
         String csvFileName = "dane-osoby.csv";
         String xmlFileName = "dane-osoby.xml";
 
+        System.out.println();
         System.out.println("Which type we read:");
         System.out.println("1. CSV");
         System.out.println("2. XML");
