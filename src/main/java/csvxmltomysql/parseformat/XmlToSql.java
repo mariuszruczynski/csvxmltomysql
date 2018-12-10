@@ -2,7 +2,7 @@ package csvxmltomysql.parseformat;
 
 import csvxmltomysql.model.Contact;
 import csvxmltomysql.model.Customer;
-import csvxmltomysql.service.sqlService;
+import csvxmltomysql.service.SqlService;
 import org.xml.sax.InputSource;
 import org.xml.sax.helpers.DefaultHandler;
 
@@ -17,7 +17,7 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.Attributes;
 
-import static csvxmltomysql.service.sqlService.saveContactToSql;
+import static csvxmltomysql.service.SqlService.saveContactToSql;
 
 public class XmlToSql extends DefaultHandler {
 
@@ -90,7 +90,7 @@ public class XmlToSql extends DefaultHandler {
                 saveContactToSql(new Contact(contactId, customerId-1, contactType, ic));
                 contactId++;
             }
-            sqlService.saveCustomerToSql(customer);
+            SqlService.saveCustomerToSql(customer);
         } else if (qName.equalsIgnoreCase("Name")) {
             customer.setName(temp);
         } else if (qName.equalsIgnoreCase("Surname")) {

@@ -8,7 +8,7 @@ import java.sql.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class sqlServiceTest {
+class sqlServiceTest {
 
     private Customer customer = null;
     private Contact contact = null;
@@ -17,7 +17,7 @@ public class sqlServiceTest {
     private String password = "";
     private Connection conn;
 
-    private Customer findCustomerById(Integer id) {
+    private Customer findCustomerById(int id) {
 
         try {
             conn = DriverManager.getConnection(url, username, password);
@@ -38,7 +38,7 @@ public class sqlServiceTest {
         return customer;
     }
 
-    private void delCustomerById(Integer id) {
+    private void delCustomerById(int id) {
 
         try {
             conn = DriverManager.getConnection(url, username, password);
@@ -52,7 +52,7 @@ public class sqlServiceTest {
         }
     }
 
-    private Contact findContactById(Integer id) {
+    private Contact findContactById(int id) {
 
         try {
             conn = DriverManager.getConnection(url, username, password);
@@ -73,7 +73,7 @@ public class sqlServiceTest {
         return contact;
     }
 
-    private void delContactById(Integer id) {
+    private void delContactById(int id) {
         try {
             conn = DriverManager.getConnection(url, username, password);
             String query = "DELETE  FROM contacts WHERE id = ? ";
@@ -96,7 +96,7 @@ public class sqlServiceTest {
         String city = "Warszawa";
         Customer testCustomer = new Customer(id, name, surname, age, city);
 
-        sqlService.saveCustomerToSql(testCustomer);
+        SqlService.saveCustomerToSql(testCustomer);
 
         findCustomerById(1055);
 
@@ -111,13 +111,13 @@ public class sqlServiceTest {
     @Test
     void addContactFindByIdAndCheckIsExistInDb() {
 
-        Integer id = 1055;
-        Integer customerId = 1000;
-        Integer contactType = 2;
+        int id = 1055;
+        int customerId = 1000;
+        int contactType = 2;
         String con = "25252525";
         Contact testContact = new Contact(id, customerId, contactType, con);
 
-        sqlService.saveContactToSql(testContact);
+        SqlService.saveContactToSql(testContact);
 
         findContactById(1055);
 

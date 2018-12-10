@@ -1,9 +1,8 @@
 package csvxmltomysql.parseformat;
 
-import csvxmltomysql.model.CheckContactType;
 import csvxmltomysql.model.Contact;
 import csvxmltomysql.model.Customer;
-import csvxmltomysql.service.sqlService;
+import csvxmltomysql.service.SqlService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +13,7 @@ import java.nio.file.Paths;
 
 import static csvxmltomysql.model.CheckContactType.isAlphabetic;
 import static csvxmltomysql.model.CheckContactType.isNumeric;
-import static csvxmltomysql.service.sqlService.saveCustomerToSql;
+import static csvxmltomysql.service.SqlService.saveCustomerToSql;
 
 public class CsvToSql {
 
@@ -31,7 +30,7 @@ public class CsvToSql {
             while ((line = reader.readLine()) != null) {
                 String[] splitLine = line.split(",");
                 String name, surname, age, city, contact;
-                int type = 0;
+                int type;
 
                 if (splitLine[0] != null) {
                     name = splitLine[0];
@@ -63,7 +62,7 @@ public class CsvToSql {
                     } else {
                         type = 0;
                     }
-                    sqlService.saveContactToSql(new Contact(contactId, customerId, type, contact));
+                    SqlService.saveContactToSql(new Contact(contactId, customerId, type, contact));
                     contactId++;
                 }
 

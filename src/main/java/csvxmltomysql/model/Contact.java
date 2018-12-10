@@ -2,40 +2,39 @@ package csvxmltomysql.model;
 
 public class Contact {
 
-    private Integer id;
-    private Integer customerId;
-    private Integer type;
+    private int id;
+    private int customerId;
+    private int type;
     private String contact;
 
-    public Contact(Integer id, Integer customerId, Integer type, String contact) {
+    public Contact(int id, int customerId, int type, String contact) {
         this.id = id;
         this.customerId = customerId;
         this.type = type;
         this.contact = contact;
     }
 
-
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Integer getCustomerId() {
+    public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Integer customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 
-    public Integer getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(int type) {
         this.type = type;
     }
 

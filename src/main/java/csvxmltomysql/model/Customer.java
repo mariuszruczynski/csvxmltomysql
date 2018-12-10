@@ -2,7 +2,7 @@ package csvxmltomysql.model;
 
 public class Customer {
 
-    private Integer id;
+    private int id;
     private String name;
     private String surname;
     private String age;
@@ -11,7 +11,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(Integer id, String name, String surname, String age, String city) {
+    public Customer(int id, String name, String surname, String age, String city) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -19,7 +19,7 @@ public class Customer {
         this.city = city;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -39,7 +39,7 @@ public class Customer {
         this.city = city;
     }
 
-    public Integer getId() {
+    public int getId() {
 
         return id;
     }

@@ -13,8 +13,9 @@ public class Main {
         String csvFileName = "dane-osoby.csv";
         String xmlFileName = "dane-osoby.xml";
 
-        readAndSaveXML(xmlFileName);
-        //readAndSaveCsvFile(csvFileName);
+
+        //readAndSaveXML(xmlFileName);
+        readAndSaveCsvFile(csvFileName);
 
     }
 }

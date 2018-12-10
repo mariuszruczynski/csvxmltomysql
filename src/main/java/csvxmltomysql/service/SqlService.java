@@ -8,7 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class sqlService {
+public class SqlService {
 
     private static String url = "jdbc:mysql://localhost:3306/sqldb?useSSL=false";
     private static String username = "root";
