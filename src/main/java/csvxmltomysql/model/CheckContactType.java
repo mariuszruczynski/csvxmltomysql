@@ -2,28 +2,44 @@ package csvxmltomysql.model;
 
 public class CheckContactType {
 
-    public static boolean isNumeric(String strNum) {
-        if (strNum == null) {
+    public static boolean insTelNumber(String input) {
+        if (input == null) {
+            return false;
+        }
+        input = input.replaceAll("\\s", "");
+        input = input.replace("-", "");
+        input = input.replace("+", "");
+        if (input.length() < 9 || input.length()>9) {
             return false;
         }
         try {
-            double d = Double.parseDouble(strNum);
+            double d = Double.parseDouble(input);
         } catch (NumberFormatException | NullPointerException nfe) {
             return false;
         }
         return true;
     }
 
-    public static boolean isAlphabetic(String input) {
+    public static boolean isJabber(String input) {
         if (input == null) {
             return false;
         }
-        String[] inputsplit = input.split("");
-        for (int i = 0; i < inputsplit.length; i++) {
-            if (!Character.isLetter(input.charAt(i))) {
-                return false;
-            }
+        if (input.toLowerCase().startsWith("jbr:")) {
+            return true;
         }
-        return true;
+        return false;
+    }
+
+    public static boolean isMail(String input) {
+        if (input == null) {
+            return false;
+        }
+        if (input.startsWith("@")) {
+            return false;
+        }
+        if (input.contains("@")) {
+            return true;
+        }
+        return false;
     }
 }

@@ -11,8 +11,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static csvxmltomysql.model.CheckContactType.isAlphabetic;
-import static csvxmltomysql.model.CheckContactType.isNumeric;
+import static csvxmltomysql.model.CheckContactType.isJabber;
+import static csvxmltomysql.model.CheckContactType.insTelNumber;
+import static csvxmltomysql.model.CheckContactType.isMail;
 import static csvxmltomysql.service.SqlService.saveCustomerToSql;
 
 public class CsvToSql {
@@ -53,11 +54,11 @@ public class CsvToSql {
                 }
                 for (int i = 4; i < splitLine.length; i++) {
                     contact = splitLine[i];
-                    if (contact.contains("@")) {
+                    if (isMail(contact)) {
                         type = 1;
-                    } else if (isNumeric(contact)) {
+                    } else if (insTelNumber(contact)) {
                         type = 2;
-                    } else if (isAlphabetic(contact)) {
+                    } else if (isJabber(contact)) {
                         type = 3;
                     } else {
                         type = 0;
