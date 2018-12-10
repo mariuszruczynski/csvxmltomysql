@@ -2,7 +2,7 @@ package csvxmltomysql.model;
 
 public class CheckContactType {
 
-    public static boolean insTelNumber(String input) {
+    public static boolean isTelNumber(String input) {
         if (input == null) {
             return false;
         }
@@ -30,7 +30,7 @@ public class CheckContactType {
         return false;
     }
 
-    public static boolean isMail(String input) {
+    public static boolean isEmail(String input) {
         if (input == null) {
             return false;
         }

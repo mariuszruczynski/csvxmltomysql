@@ -12,8 +12,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static csvxmltomysql.model.CheckContactType.isJabber;
-import static csvxmltomysql.model.CheckContactType.insTelNumber;
-import static csvxmltomysql.model.CheckContactType.isMail;
+import static csvxmltomysql.model.CheckContactType.isTelNumber;
+import static csvxmltomysql.model.CheckContactType.isEmail;
 import static csvxmltomysql.service.SqlService.findMaxContactsId;
 import static csvxmltomysql.service.SqlService.findMaxCustomersId;
 import static csvxmltomysql.service.SqlService.saveCustomerToSql;
@@ -56,9 +56,9 @@ public class CsvToSql {
                 }
                 for (int i = 4; i < splitLine.length; i++) {
                     contact = splitLine[i];
-                    if (isMail(contact)) {
+                    if (isEmail(contact)) {
                         type = 1;
-                    } else if (insTelNumber(contact)) {
+                    } else if (isTelNumber(contact)) {
                         type = 2;
                     } else if (isJabber(contact)) {
                         type = 3;
