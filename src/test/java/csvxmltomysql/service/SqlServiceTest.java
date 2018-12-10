@@ -8,16 +8,16 @@ import java.sql.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class sqlServiceTest {
+public class SqlServiceTest {
 
-    private Customer customer = null;
-    private Contact contact = null;
-    private String url = "jdbc:mysql://localhost:3306/sqldb?useSSL=false";
-    private String username = "root";
-    private String password = "";
-    private Connection conn;
+    private static Customer customer = null;
+    private static Contact contact = null;
+    private static String url = "jdbc:mysql://localhost:3306/sqldb?useSSL=false";
+    private static String username = "root";
+    private static String password = "";
+    private static Connection conn;
 
-    private Customer findCustomerById(int id) {
+    public static Customer findCustomerById(int id) {
 
         try {
             conn = DriverManager.getConnection(url, username, password);
@@ -38,7 +38,7 @@ class sqlServiceTest {
         return customer;
     }
 
-    private void delCustomerById(int id) {
+    public static void delCustomerById(int id) {
 
         try {
             conn = DriverManager.getConnection(url, username, password);
@@ -52,7 +52,7 @@ class sqlServiceTest {
         }
     }
 
-    private Contact findContactById(int id) {
+    public static Contact findContactById(int id) {
 
         try {
             conn = DriverManager.getConnection(url, username, password);
@@ -73,7 +73,7 @@ class sqlServiceTest {
         return contact;
     }
 
-    private void delContactById(int id) {
+    public static void delContactById(int id) {
         try {
             conn = DriverManager.getConnection(url, username, password);
             String query = "DELETE  FROM contacts WHERE id = ? ";

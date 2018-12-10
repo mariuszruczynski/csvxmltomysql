@@ -16,7 +16,7 @@ public class Main {
         String xmlFileName = "dane-osoby.xml";
 
         System.out.println();
-        System.out.println("Which type we read:");
+        System.out.println("Which type file read (select: 1 or 2):");
         System.out.println("1. CSV");
         System.out.println("2. XML");
         int option = Integer.parseInt(sc.nextLine());
