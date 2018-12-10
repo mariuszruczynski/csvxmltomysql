@@ -122,7 +122,7 @@ public class SqlServiceTest {
         findContactById(1055);
 
         assertEquals(contact.getCustomerId(), customerId);
-        assertEquals(contact.getType(),contactType);
+        assertEquals(contact.getType(), contactType);
         assertEquals(contact.getContact(), con);
 
         delContactById(id);
