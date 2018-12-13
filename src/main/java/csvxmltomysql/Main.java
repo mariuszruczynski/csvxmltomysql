@@ -14,18 +14,25 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String csvFileName = "dane-osoby.csv";
         String xmlFileName = "dane-osoby.xml";
+        boolean exit = false;
 
-        System.out.println();
-        System.out.println("Which type file read (select: 1 or 2):");
-        System.out.println("1. CSV");
-        System.out.println("2. XML");
-        int option = Integer.parseInt(sc.nextLine());
-        if (option == 1) {
-            readAndSaveCsvFile(csvFileName);
-        } else if (option == 2) {
-            readAndSaveXML(xmlFileName);
-        } else {
-            System.out.println("wrong choice");
+        while (!exit) {
+            System.out.println("\nWhich type file read (select: 1 or 2):");
+            System.out.println("1. CSV");
+            System.out.println("2. XML");
+            System.out.println("3. Exit");
+            int option = Integer.parseInt(sc.nextLine());
+            switch (option) {
+                case 1:
+                    readAndSaveCsvFile(csvFileName);
+                    break;
+                case 2:
+                    readAndSaveXML(xmlFileName);
+                    break;
+                default:
+                    exit = true;
+            }
         }
     }
 }
+
