@@ -11,6 +11,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CsvToSqlTest {
 
+    private SqlService sqlService = new SqlService();
+    private CsvToSql csvToSql = new CsvToSql();
+
+
     @Test
     void shouldReadCsvFileAndSaveToDataBase() {
 
@@ -19,9 +23,9 @@ class CsvToSqlTest {
         Contact contact2;
         String patch = "src/test/resources/test.csv";
 
-        CsvToSql.readAndSaveCsvFile(patch);
-        int testCunsomerId = SqlService.findMaxCustomersId();
-        int testCunsomerContactsId = SqlService.findMaxContactsId();
+        csvToSql.readAndSaveCsvFile(patch);
+        int testCunsomerId = sqlService.findMaxCustomersId();
+        int testCunsomerContactsId = sqlService.findMaxContactsId();
 
         customer = SqlServiceTest.findCustomerById(testCunsomerId);
         contact1 = SqlServiceTest.findContactById(testCunsomerContactsId - 1);

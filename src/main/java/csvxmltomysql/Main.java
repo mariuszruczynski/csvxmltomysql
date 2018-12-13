@@ -1,15 +1,16 @@
 package csvxmltomysql;
 
-import csvxmltomysql.service.SqlService;
+import csvxmltomysql.parseformat.CsvToSql;
+import csvxmltomysql.parseformat.XmlToSql;
 
 import java.util.Scanner;
 
-import static csvxmltomysql.parseformat.CsvToSql.readAndSaveCsvFile;
-import static csvxmltomysql.parseformat.XmlToSql.readAndSaveXML;
 
 public class Main {
 
     public static void main(String... args) {
+        XmlToSql xmlToSql = new XmlToSql();
+        CsvToSql csvToSql = new CsvToSql();
 
         Scanner sc = new Scanner(System.in);
         String csvFileName = "dane-osoby.csv";
@@ -24,10 +25,10 @@ public class Main {
             int option = Integer.parseInt(sc.nextLine());
             switch (option) {
                 case 1:
-                    readAndSaveCsvFile(csvFileName);
+                    csvToSql.readAndSaveCsvFile(csvFileName);
                     break;
                 case 2:
-                    readAndSaveXML(xmlFileName);
+                    xmlToSql.readAndSaveXML(xmlFileName);
                     break;
                 default:
                     exit = true;

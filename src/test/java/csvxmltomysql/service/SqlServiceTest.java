@@ -16,6 +16,7 @@ public class SqlServiceTest {
     private static String username = "root";
     private static String password = "";
     private static Connection conn;
+    private SqlService sqlService = new SqlService();
 
     public static Customer findCustomerById(int id) {
 
@@ -89,14 +90,14 @@ public class SqlServiceTest {
     @Test
     void shouldAddCustomerFindByIdAndCheckIsExistInDb() {
 
-        int id = SqlService.findMaxContactsId()+1;
+        int id = sqlService.findMaxContactsId()+1;
         String name = "Maria";
         String surname = "Kowalska";
         String age = "25";
         String city = "Warszawa";
         Customer testCustomer = new Customer(id, name, surname, age, city);
 
-        SqlService.saveCustomerToSql(testCustomer);
+        sqlService.saveCustomerToSql(testCustomer);
 
         findCustomerById(id);
 
@@ -111,13 +112,13 @@ public class SqlServiceTest {
     @Test
     void shouldAddContactFindByIdAndCheckIsExistInDb() {
 
-        int id = SqlService.findMaxContactsId()+1;
-        int customerId = SqlService.findMaxCustomersId()+1;
+        int id = sqlService.findMaxContactsId()+1;
+        int customerId = sqlService.findMaxCustomersId()+1;
         int contactType = 2;
         String con = "252525255";
         Contact testContact = new Contact(id, customerId, contactType, con);
 
-        SqlService.saveContactToSql(testContact);
+        sqlService.saveContactToSql(testContact);
 
         findContactById(id);
 

@@ -14,19 +14,16 @@ import java.nio.file.Paths;
 import static csvxmltomysql.parseformat.CheckContactType.isJabber;
 import static csvxmltomysql.parseformat.CheckContactType.isTelNumber;
 import static csvxmltomysql.parseformat.CheckContactType.isEmail;
-import static csvxmltomysql.service.SqlService.findMaxContactsId;
-import static csvxmltomysql.service.SqlService.findMaxCustomersId;
-import static csvxmltomysql.service.SqlService.saveCustomerToSql;
 
 public class CsvToSql {
 
-    public static void readAndSaveCsvFile(String fileName) {
-
+    public void readAndSaveCsvFile(String fileName) {
+        SqlService sqlService = new SqlService();
         Charset charset = Charset.forName("utf-8");
         Path path = Paths.get(fileName);
         String line;
-        int customerId = findMaxCustomersId() + 1;
-        int contactId = findMaxContactsId() + 1;
+        int customerId = sqlService.findMaxCustomersId() + 1;
+        int contactId = sqlService.findMaxContactsId() + 1;
 
         try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
 
@@ -51,12 +48,12 @@ public class CsvToSql {
                     } else {
                         type = 0;
                     }
-                    SqlService.saveContactToSql(new Contact(contactId, customerId, type, contact));
+                    sqlService.saveContactToSql(new Contact(contactId, customerId, type, contact));
                     contactId++;
                 }
 
                 Customer customer = new Customer(customerId, name, surname, age, city);
-                saveCustomerToSql(customer);
+                sqlService.saveCustomerToSql(customer);
                 customerId++;
             }
         } catch (IOException ex) {

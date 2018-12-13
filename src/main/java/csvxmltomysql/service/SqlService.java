@@ -15,7 +15,7 @@ public class SqlService {
     private static String password = "";
     private static Connection conn = null;
 
-    public static void saveCustomerToSql(Customer customer) {
+    public void saveCustomerToSql(Customer customer) {
 
         try {
             conn = DriverManager.getConnection(url, username, password);
@@ -33,7 +33,7 @@ public class SqlService {
         }
     }
 
-    public static void saveContactToSql(Contact contact) {
+    public void saveContactToSql(Contact contact) {
 
         try {
             conn = DriverManager.getConnection(url, username, password);
@@ -50,7 +50,7 @@ public class SqlService {
         }
     }
 
-    public static int findMaxCustomersId() {
+    public int findMaxCustomersId() {
         try {
             conn = DriverManager.getConnection(url, username, password);
             String query = "SELECT MAX(id) FROM customers";
@@ -66,7 +66,7 @@ public class SqlService {
         return maxCustomersId;
     }
 
-    public static int findMaxContactsId() {
+    public int findMaxContactsId() {
         try {
             conn = DriverManager.getConnection(url, username, password);
             String query = "SELECT MAX(id) FROM contacts";
