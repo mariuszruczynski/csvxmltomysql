@@ -7,20 +7,19 @@ import java.sql.*;
 
 public class SqlService {
 
-    private static int maxCustomersId;
-    private static int maxContactId;
+    private int maxCustomersId;
+    private int maxContactId;
 
-    private static String url = "jdbc:mysql://localhost:3306/sqldb?useSSL=false";
-    private static String username = "root";
-    private static String password = "";
-    private static Connection conn = null;
+    private Connection conn = null;
+
 
     public void saveCustomerToSql(Customer customer) {
 
+        conn = ConnectionManager.getConnection();
+
+        String insertSQL = "INSERT INTO customers VALUES (?,?,?,?,?)";
+        PreparedStatement pstmt;
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            String insertSQL = "INSERT INTO customers VALUES (?,?,?,?,?)";
-            PreparedStatement pstmt;
             pstmt = conn.prepareStatement(insertSQL);
             pstmt.setInt(1, customer.getId());
             pstmt.setString(2, customer.getName());
@@ -35,10 +34,10 @@ public class SqlService {
 
     public void saveContactToSql(Contact contact) {
 
+        conn = ConnectionManager.getConnection();
+        String insertSQL = "INSERT INTO contacts VALUES (?,?,?,?)";
+        PreparedStatement pstmt;
         try {
-            conn = DriverManager.getConnection(url, username, password);
-            String insertSQL = "INSERT INTO contacts VALUES (?,?,?,?)";
-            PreparedStatement pstmt;
             pstmt = conn.prepareStatement(insertSQL);
             pstmt.setInt(1, contact.getId());
             pstmt.setInt(2, contact.getCustomerId());
@@ -51,8 +50,10 @@ public class SqlService {
     }
 
     public int findMaxCustomersId() {
+
+        conn = ConnectionManager.getConnection();
+
         try {
-            conn = DriverManager.getConnection(url, username, password);
             String query = "SELECT MAX(id) FROM customers";
             ResultSet rs;
             rs = conn.createStatement()
@@ -67,8 +68,9 @@ public class SqlService {
     }
 
     public int findMaxContactsId() {
+
+        conn = ConnectionManager.getConnection();
         try {
-            conn = DriverManager.getConnection(url, username, password);
             String query = "SELECT MAX(id) FROM contacts";
             ResultSet rs;
             rs = conn.createStatement()
@@ -79,8 +81,7 @@ public class SqlService {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return maxContactId;
     }
-
-
 }

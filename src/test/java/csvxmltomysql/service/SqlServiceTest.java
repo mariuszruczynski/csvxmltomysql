@@ -12,16 +12,13 @@ public class SqlServiceTest {
 
     private static Customer customer = null;
     private static Contact contact = null;
-    private static String url = "jdbc:mysql://localhost:3306/sqldb?useSSL=false";
-    private static String username = "root";
-    private static String password = "";
-    private static Connection conn;
+    private static Connection conn = null;
     private SqlService sqlService = new SqlService();
 
     public static Customer findCustomerById(int id) {
 
         try {
-            conn = DriverManager.getConnection(url, username, password);
+            conn = ConnectionManager.getConnection();
             String query = "SELECT * FROM customers WHERE id = ? ";
             PreparedStatement ps;
             ps = conn.prepareStatement(query);
@@ -42,7 +39,7 @@ public class SqlServiceTest {
     public static void delCustomerById(int id) {
 
         try {
-            conn = DriverManager.getConnection(url, username, password);
+            conn = ConnectionManager.getConnection();
             String query = "DELETE  FROM customers WHERE id = ? ";
             PreparedStatement ps;
             ps = conn.prepareStatement(query);
@@ -56,7 +53,7 @@ public class SqlServiceTest {
     public static Contact findContactById(int id) {
 
         try {
-            conn = DriverManager.getConnection(url, username, password);
+            conn = ConnectionManager.getConnection();
             String query = "SELECT * FROM contacts WHERE id = ? ";
             PreparedStatement ps;
             ps = conn.prepareStatement(query);
@@ -76,7 +73,7 @@ public class SqlServiceTest {
 
     public static void delContactById(int id) {
         try {
-            conn = DriverManager.getConnection(url, username, password);
+            conn = ConnectionManager.getConnection();
             String query = "DELETE  FROM contacts WHERE id = ? ";
             PreparedStatement ps;
             ps = conn.prepareStatement(query);
@@ -90,7 +87,7 @@ public class SqlServiceTest {
     @Test
     void shouldAddCustomerFindByIdAndCheckIsExistInDb() {
 
-        int id = sqlService.findMaxContactsId()+1;
+        int id = sqlService.findMaxContactsId() + 1;
         String name = "Maria";
         String surname = "Kowalska";
         String age = "25";
@@ -112,8 +109,8 @@ public class SqlServiceTest {
     @Test
     void shouldAddContactFindByIdAndCheckIsExistInDb() {
 
-        int id = sqlService.findMaxContactsId()+1;
-        int customerId = sqlService.findMaxCustomersId()+1;
+        int id = sqlService.findMaxContactsId() + 1;
+        int customerId = sqlService.findMaxCustomersId() + 1;
         int contactType = 2;
         String con = "252525255";
         Contact testContact = new Contact(id, customerId, contactType, con);
