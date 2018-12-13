@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class XmlToSqlTest {
 
     @Test
-    void readXmlFileAndCheckSaveToDataBase() {
+    void shouldReadXmlFileAndSaveToDataBase() {
 
         Customer customer;
         Contact contact1;

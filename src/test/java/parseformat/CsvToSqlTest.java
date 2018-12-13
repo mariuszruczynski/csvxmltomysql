@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class CsvToSqlTest {
 
     @Test
-    void readCsvFileAndCheckSaveToDataBase() {
+    void shouldReadCsvFileAndSaveToDataBase() {
 
         Customer customer;
         Contact contact1;

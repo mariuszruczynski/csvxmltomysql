@@ -87,9 +87,9 @@ public class SqlServiceTest {
     }
 
     @Test
-    void addCustomerFindByIdAndCheckIsExistInDb() {
+    void shouldAddCustomerFindByIdAndCheckIsExistInDb() {
 
-        int id = 1055;
+        int id = SqlService.findMaxContactsId()+1;
         String name = "Maria";
         String surname = "Kowalska";
         String age = "25";
@@ -98,7 +98,7 @@ public class SqlServiceTest {
 
         SqlService.saveCustomerToSql(testCustomer);
 
-        findCustomerById(1055);
+        findCustomerById(id);
 
         assertEquals(customer.getName(), name);
         assertEquals(customer.getSurname(), surname);
@@ -109,17 +109,17 @@ public class SqlServiceTest {
     }
 
     @Test
-    void addContactFindByIdAndCheckIsExistInDb() {
+    void shouldAddContactFindByIdAndCheckIsExistInDb() {
 
-        int id = 1055;
-        int customerId = 1000;
+        int id = SqlService.findMaxContactsId()+1;
+        int customerId = SqlService.findMaxCustomersId()+1;
         int contactType = 2;
-        String con = "25252525";
+        String con = "252525255";
         Contact testContact = new Contact(id, customerId, contactType, con);
 
         SqlService.saveContactToSql(testContact);
 
-        findContactById(1055);
+        findContactById(id);
 
         assertEquals(contact.getCustomerId(), customerId);
         assertEquals(contact.getType(), contactType);

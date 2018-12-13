@@ -3,12 +3,13 @@ package model;
 import csvxmltomysql.model.CheckContactType;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CheckContactTypeTest {
 
     @Test
-    void testIsContactAPhoneNumber() {
+    void shouldCheckIsContactAPhoneNumber() {
 
         String number1 = "+252-565-525";
         String number2 = "565656565";
@@ -20,15 +21,15 @@ public class CheckContactTypeTest {
 
         assertTrue(CheckContactType.isTelNumber(number1));
         assertTrue(CheckContactType.isTelNumber(number2));
-        assertTrue(!CheckContactType.isTelNumber(number3));
+        assertFalse(CheckContactType.isTelNumber(number3));
         assertTrue(CheckContactType.isTelNumber(number4));
         assertTrue(CheckContactType.isTelNumber(number5));
-        assertTrue(!CheckContactType.isTelNumber(number6));
-        assertTrue(!CheckContactType.isTelNumber(number7));
+        assertFalse(CheckContactType.isTelNumber(number6));
+        assertFalse(CheckContactType.isTelNumber(number7));
     }
 
     @Test
-    void testIsContactAJabber() {
+    void shouldCheckIsContactAJabber() {
 
         String testContact1 = "jbr:sometext";
         String testContact2 = "jbrsometext";
@@ -37,14 +38,14 @@ public class CheckContactTypeTest {
         String testContact5 = "JBR:somet@text.pl";
 
         assertTrue(CheckContactType.isJabber(testContact1));
-        assertTrue(!CheckContactType.isJabber(testContact2));
+        assertFalse(CheckContactType.isJabber(testContact2));
         assertTrue(CheckContactType.isJabber(testContact3));
-        assertTrue(!CheckContactType.isJabber(testContact4));
+        assertFalse(CheckContactType.isJabber(testContact4));
         assertTrue(CheckContactType.isJabber(testContact5));
     }
 
     @Test
-    void testIsContactAEmail() {
+    void shouldCheckIsContactAEmail() {
         String testContact1 = "some@sometext";
         String testContact2 = "@sometext";
         String testContact3 = "sometext@some.text";
@@ -53,10 +54,10 @@ public class CheckContactTypeTest {
         String testContact6 = "some.sometext@";
 
         assertTrue(CheckContactType.isEmail(testContact1));
-        assertTrue(!CheckContactType.isEmail(testContact2));
+        assertFalse(CheckContactType.isEmail(testContact2));
         assertTrue(CheckContactType.isEmail(testContact3));
-        assertTrue(!CheckContactType.isEmail(testContact4));
+        assertFalse(CheckContactType.isEmail(testContact4));
         assertTrue(CheckContactType.isEmail(testContact5));
-        assertTrue(!CheckContactType.isEmail(testContact6));
+        assertFalse(CheckContactType.isEmail(testContact6));
     }
 }
