@@ -1,4 +1,4 @@
-package csvxmltomysql.model;
+package csvxmltomysql.parseformat;
 
 public class CheckContactType {
 

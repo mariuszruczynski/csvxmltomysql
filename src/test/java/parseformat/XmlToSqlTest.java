@@ -2,7 +2,6 @@ package parseformat;
 
 import csvxmltomysql.model.Contact;
 import csvxmltomysql.model.Customer;
-import csvxmltomysql.parseformat.CsvToSql;
 import csvxmltomysql.parseformat.XmlToSql;
 import csvxmltomysql.service.SqlService;
 import csvxmltomysql.service.SqlServiceTest;

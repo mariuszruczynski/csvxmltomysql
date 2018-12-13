@@ -1,6 +1,6 @@
-package model;
+package parseformat;
 
-import csvxmltomysql.model.CheckContactType;
+import csvxmltomysql.parseformat.CheckContactType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
